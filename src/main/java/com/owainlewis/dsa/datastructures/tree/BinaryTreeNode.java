@@ -1,4 +1,4 @@
-package com.owainlewis.dsa.datastructures.binarysearchtree;
+package com.owainlewis.dsa.datastructures.tree;
 
 /**
  * BinaryTreeNode represents a single node in a binary tree
