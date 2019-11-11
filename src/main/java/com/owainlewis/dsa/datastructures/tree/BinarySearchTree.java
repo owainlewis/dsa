@@ -19,9 +19,11 @@ public final class BinarySearchTree<T extends Comparable<T>> {
 
     private Comparator<T> comparator;
 
+    public BinarySearchTree() {
+    }
+
     public BinarySearchTree(Comparator<T> c) {
-        root = null;
-        comparator = c;
+        this.comparator = c;
     }
 
     private int compare(T x, T y) {
@@ -35,13 +37,13 @@ public final class BinarySearchTree<T extends Comparable<T>> {
      * @param value A value to insert
      */
     public void insert(T value) {
-        root = insertRecursive(root, value);
+        root = this.insertRecursive(root, value);
     }
 
     private BinaryTreeNode<T> insertRecursive(BinaryTreeNode<T> current, T value) {
         if (current == null)
             return new BinaryTreeNode<>(value);
-        int comparision = compare(value, current.getData());
+        int comparision = this.compare(value, current.getData());
         if (comparision == 0)
             return current;
         if (comparision < 0)
@@ -51,8 +53,26 @@ public final class BinarySearchTree<T extends Comparable<T>> {
         return current;
     }
 
+    public boolean contains(T item) {
+        return this.search(this.root, item);
+    }
+
+    private boolean search(BinaryTreeNode<T> node, T item) {
+        if (node == null) return false;
+        if (this.compare(item, node.getData()) == 0) {
+            return true;
+        }
+
+        if (this.compare(item, node.getData()) < 0) {
+            return this.search(node.getLeft(), item);
+        }
+
+        return this.search(node.getRight(), item);
+
+    }
+
     public int height() {
-        return height(root);
+        return this.height(root);
     }
 
     private int height(BinaryTreeNode<T> tree) {
