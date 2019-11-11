@@ -5,13 +5,15 @@ import java.util.Comparator;
 /**
  * A binary search tree (BST) is a data structure which has the following properties:
  *
- * 1.) The left subtree of a node contains only nodes with keys less than the node's key.
- * 2.) The right subtree of a node contains only nodes with keys greater than the node's key.
- * 3.) Both the left and right subtrees must also be binary search trees.
+ * <p>1.) The left subtree of a node contains only nodes with keys less than the node's key. 2.) The
+ * right subtree of a node contains only nodes with keys greater than the node's key. 3.) Both the
+ * left and right subtrees must also be binary search trees.
+ *
  * <p>
- * @see <a href="https://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree (Wikipedia)</a>
- * <br>
+ *
  * @author Owain Lewis <owain@owainlewis.com>
+ * @see <a href="https://en.wikipedia.org/wiki/Binary_search_tree">Binary Search Tree
+ *     (Wikipedia)</a> <br>
  */
 public final class BinarySearchTree<T extends Comparable<T>> {
 
@@ -19,8 +21,7 @@ public final class BinarySearchTree<T extends Comparable<T>> {
 
     private Comparator<T> comparator;
 
-    public BinarySearchTree() {
-    }
+    public BinarySearchTree() {}
 
     public BinarySearchTree(Comparator<T> c) {
         this.comparator = c;
@@ -28,7 +29,7 @@ public final class BinarySearchTree<T extends Comparable<T>> {
 
     private int compare(T x, T y) {
         if (comparator == null) return x.compareTo(y);
-        return comparator.compare(x,y);
+        return comparator.compare(x, y);
     }
 
     /**
@@ -41,15 +42,11 @@ public final class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private BinaryTreeNode<T> insertRecursive(BinaryTreeNode<T> current, T value) {
-        if (current == null)
-            return new BinaryTreeNode<>(value);
+        if (current == null) return new BinaryTreeNode<>(value);
         int comparision = this.compare(value, current.getData());
-        if (comparision == 0)
-            return current;
-        if (comparision < 0)
-            current.setLeft(insertRecursive(current.getLeft(), value));
-        else
-            current.setRight(insertRecursive(current.getRight(), value));
+        if (comparision == 0) return current;
+        if (comparision < 0) current.setLeft(insertRecursive(current.getLeft(), value));
+        else current.setRight(insertRecursive(current.getRight(), value));
         return current;
     }
 
@@ -68,7 +65,6 @@ public final class BinarySearchTree<T extends Comparable<T>> {
         }
 
         return this.search(node.getRight(), item);
-
     }
 
     public int height() {
