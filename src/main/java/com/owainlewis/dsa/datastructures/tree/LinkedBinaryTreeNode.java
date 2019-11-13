@@ -48,7 +48,6 @@ public final class LinkedBinaryTreeNode<T> implements BinaryTreeNode<T> {
     }
 
     public void setRight(BinaryTreeNode<T> child) {
-        // Ensure the child is not an ancestor.
         for (LinkedBinaryTreeNode<T> n = this; n != null; n = n.parent) {
             if (n == child) {
                 throw new IllegalArgumentException();
@@ -67,11 +66,9 @@ public final class LinkedBinaryTreeNode<T> implements BinaryTreeNode<T> {
 
     public void remove() {
         if (parent != null) {
-            if (parent.left == this) {
-                parent.left = null;
-            } else if (parent.right == this) {
-                parent.right = null;
-            }
+            if (parent.left == this) parent.left = null;
+            else if (parent.right == this) parent.right = null;
+
             this.parent = null;
         }
     }
