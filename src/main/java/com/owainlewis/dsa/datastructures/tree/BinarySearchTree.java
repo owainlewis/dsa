@@ -17,14 +17,28 @@ import java.util.Comparator;
  */
 public final class BinarySearchTree<T extends Comparable<T>> {
 
-    private BinaryTreeNode<T> root;
+    /** Root of the tree. */
+    private BinaryTreeNode<T> root = null;
 
+    /**
+     * Comparator used to order the items in the tree. If null, the default ordering of items will
+     * be used.
+     */
     private Comparator<T> comparator;
 
-    public BinarySearchTree() {}
+    /** Constructs an empty BST */
+    public BinarySearchTree() {
+        this(null);
+    }
 
+    /** Constructs a BST that orders its items according to the provided comparator. */
     public BinarySearchTree(Comparator<T> c) {
-        this.comparator = c;
+        comparator = c;
+    }
+
+    /** Returns the root of the tree. */
+    protected BinaryTreeNode getRoot() {
+        return root;
     }
 
     private int compare(T x, T y) {
@@ -42,7 +56,7 @@ public final class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private BinaryTreeNode<T> insertRecursive(BinaryTreeNode<T> current, T value) {
-        if (current == null) return new BinaryTreeNode<>(value);
+        if (current == null) return new LinkedBinaryTreeNode<>(value);
         int comparision = this.compare(value, current.getData());
         if (comparision == 0) return current;
         if (comparision < 0) current.setLeft(insertRecursive(current.getLeft(), value));

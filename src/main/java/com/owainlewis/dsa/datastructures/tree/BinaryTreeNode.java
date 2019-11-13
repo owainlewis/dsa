@@ -1,48 +1,42 @@
 package com.owainlewis.dsa.datastructures.tree;
 
-/**
- * BinaryTreeNode represents a single node in a binary tree
- *
- * @param <T>*
- */
-public final class BinaryTreeNode<T extends Comparable<? super T>> {
+public interface BinaryTreeNode<T> {
+    /** Returns the data stored in this node. */
+    T getData();
 
-    private T data;
+    /** Set the data stored in this node. */
+    void setData(T data);
 
-    private BinaryTreeNode<T> left;
+    /** Returns the parent of this node, or null if this node is a root. */
+    BinaryTreeNode<T> getParent();
 
-    private BinaryTreeNode<T> right;
+    /** Returns the left child of this node, or null if it does not have one. */
+    BinaryTreeNode<T> getLeft();
 
     /**
-     * Create a BST node with the given data.
+     * Removes child from its current parent and inserts it as the left child of this node. If this
+     * node already has a left child it is removed.
      *
-     * @param data the value of this node
+     * @exception IllegalArgumentException if the child is an ancestor of this node, since that
+     *     would make a cycle in the tree.
      */
-    public BinaryTreeNode(T data) {
-        this.data = data;
-    }
+    void setLeft(BinaryTreeNode<T> child);
 
-    public T getData() {
-        return this.data;
-    }
+    /** Returns the right child of this node, or null if it does not have one. */
+    BinaryTreeNode<T> getRight();
 
-    public void setData(T data) {
-        this.data = data;
-    }
+    /**
+     * Removes child from its current parent and inserts it as the right child of this node. If this
+     * node already has a right child it is removed.
+     *
+     * @exception IllegalArgumentException if the child is an ancestor of this node, since that
+     *     would make a cycle in the tree.
+     */
+    void setRight(BinaryTreeNode<T> child);
 
-    public BinaryTreeNode<T> getLeft() {
-        return this.left;
-    }
-
-    public BinaryTreeNode<T> getRight() {
-        return this.right;
-    }
-
-    public void setLeft(BinaryTreeNode<T> node) {
-        this.left = node;
-    }
-
-    public void setRight(BinaryTreeNode<T> node) {
-        this.right = node;
-    }
+    /**
+     * Removes this node, and all its descendants, from whatever tree it is in. Does nothing if this
+     * node is a root.
+     */
+    void remove();
 }
